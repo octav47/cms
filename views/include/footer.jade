@@ -1,0 +1,192 @@
+// PAGE FOOTER
+.page-footer
+    .row
+        .col-xs-12.col-sm-6
+            span.txt-color-white
+                | CMS 0.0.1-alpha
+                span.hidden-xs , Kir Tribunsky
+                |  © 2015-2017
+        .col-xs-6.col-sm-6.text-right.hidden-xs
+            .txt-color-white.inline-block
+                i.txt-color-blueLight.hidden-mobile
+                    | Последняя активность
+                    i.fa.fa-clock-o
+                    strong 52 мин назад  
+                .btn-group.dropup
+                    button.btn.btn-xs.dropdown-toggle.bg-color-blue.txt-color-white(data-toggle='dropdown')
+                        i.fa.fa-link
+                        span.caret
+                    ul.dropdown-menu.pull-right.text-left
+                        li
+                            .padding-5
+                                p.txt-color-darken.font-sm.no-margin Прогрессбар
+                                .progress.progress-micro.no-margin
+                                    .progress-bar.progress-bar-success(style='width: 50%;')
+                        li.divider
+                        li
+                            .padding-5
+                                p.txt-color-darken.font-sm.no-margin Ещё прогрессбар
+                                .progress.progress-micro.no-margin
+                                    .progress-bar.progress-bar-success(style='width: 20%;')
+                        li.divider
+                        li
+                            .padding-5
+                                p.txt-color-darken.font-sm.no-margin
+                                    | И ещё прогрессбар
+                                    span.text-danger *DANGER*
+                                .progress.progress-micro.no-margin
+                                    .progress-bar.progress-bar-danger(style='width: 70%;')
+                        li.divider
+                        li
+                            .padding-5
+                                button.btn.btn-block.btn-default обновить
+// END PAGE FOOTER
+//
+    SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+    Note: These tiles are completely responsive,
+    you can add as many as you like
+#shortcut
+    ul
+        li
+            a.jarvismetro-tile.big-cubes.bg-color-blue(href='inbox.html')
+                span.iconbox
+                    i.fa.fa-envelope.fa-4x
+                    span
+                        | Mail
+                        span.label.pull-right.bg-color-darken 14
+        li
+            a.jarvismetro-tile.big-cubes.bg-color-orangeDark(href='calendar.html')
+                span.iconbox
+                    i.fa.fa-calendar.fa-4x
+                    span Calendar
+        li
+            a.jarvismetro-tile.big-cubes.bg-color-purple(href='gmap-xml.html')
+                span.iconbox
+                    i.fa.fa-map-marker.fa-4x
+                    span Maps
+        li
+            a.jarvismetro-tile.big-cubes.bg-color-blueDark(href='invoice.html')
+                span.iconbox
+                    i.fa.fa-book.fa-4x
+                    span
+                        | Invoice
+                        span.label.pull-right.bg-color-darken 99
+        li
+            a.jarvismetro-tile.big-cubes.bg-color-greenLight(href='gallery.html')
+                span.iconbox
+                    i.fa.fa-picture-o.fa-4x
+                    span Gallery
+        li
+            a.jarvismetro-tile.big-cubes.selected.bg-color-pinkDark(href='profile.html')
+                span.iconbox
+                    i.fa.fa-user.fa-4x
+                    span My Profile
+// END SHORTCUT AREA
+// ==================================================
+// PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+script(data-pace-options='{ "restartOnRequestAfter": true }', src='js/plugin/pace/pace.min.js')
+// Link to Google CDN's jQuery + jQueryUI; fall back to local
+script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+script.
+    if (!window.jQuery) {
+        document.write('<script src="js/libs/jquery-2.1.1.min.js"><\\\/script>');
+    }
+script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+script.
+    if (!window.jQuery.ui) {
+        document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\\\/script>');
+    }
+// IMPORTANT: APP CONFIG
+script(src='js/app.config.js')
+// JS TOUCH : include this plugin for mobile drag / drop touch events
+script(src='js/plugin/jquery-touch/jquery.ui.touch-punch.min.js')
+// BOOTSTRAP JS
+script(src='js/bootstrap/bootstrap.min.js')
+// CUSTOM NOTIFICATION
+script(src='js/notification/SmartNotification.min.js')
+// JARVIS WIDGETS
+script(src='js/smartwidgets/jarvis.widget.min.js')
+// EASY PIE CHARTS
+script(src='js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js')
+// SPARKLINES
+script(src='js/plugin/sparkline/jquery.sparkline.min.js')
+// JQUERY VALIDATE
+script(src='js/plugin/jquery-validate/jquery.validate.min.js')
+// JQUERY MASKED INPUT
+script(src='js/plugin/masked-input/jquery.maskedinput.min.js')
+// JQUERY SELECT2 INPUT
+script(src='js/plugin/select2/select2.min.js')
+// JQUERY UI + Bootstrap Slider
+script(src='js/plugin/bootstrap-slider/bootstrap-slider.min.js')
+// browser msie issue fix
+script(src='js/plugin/msie-fix/jquery.mb.browser.min.js')
+// FastClick: For mobile devices
+script(src='js/plugin/fastclick/fastclick.min.js')
+//
+    if IE 8
+    h1
+    | Your browser is out of date, please update your browser by going to www.microsoft.com/download
+// Demo purpose only
+//script(src='js/demo.min.js')
+// MAIN APP JS FILE
+script(src='js/app.min.js')
+// ENHANCEMENT PLUGINS : NOT A REQUIREMENT
+// Voice command : plugin
+script(src='js/speech/voicecommand.min.js')
+// SmartChat UI : plugin
+script(src='js/smart-chat-ui/smart.chat.ui.min.js')
+script(src='js/smart-chat-ui/smart.chat.manager.min.js')
+//
+    PAGE RELATED PLUGIN(S)
+    <script src="..."></script>
+script(type='text/javascript').
+    $(document).ready(function () {
+        /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+         *
+         * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+         *
+         * // activate tooltips
+         * $("[rel=tooltip]").tooltip();
+         *
+         * // activate popovers
+         * $("[rel=popover]").popover();
+         *
+         * // activate popovers with hover states
+         * $("[rel=popover-hover]").popover({ trigger: "hover" });
+         *
+         * // activate inline charts
+         * runAllCharts();
+         *
+         * // setup widgets
+         * setup_widgets_desktop();
+         *
+         * // run form elements
+         * runAllForms();
+         *
+         ********************************
+         *
+         * pageSetUp() is needed whenever you load a page.
+         * It initializes and checks for all basic elements of the page
+         * and makes rendering easier.
+         *
+         */
+        pageSetUp();
+        /*
+         * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+         * eg alert("my home function");
+         *
+         * var pagefunction = function() {
+         *   ...
+         * }
+         * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+         *
+         * TO LOAD A SCRIPT:
+         * var pagefunction = function (){
+         *  loadScript(".../plugin.js", run_after_loaded);
+         * }
+         *
+         * OR
+         *
+         * loadScript(".../plugin.js", run_after_loaded);
+         */
+    })

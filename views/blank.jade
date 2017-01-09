@@ -1,0 +1,926 @@
+doctype html
+html(lang='en-us')
+    head
+        meta(charset='utf-8')
+        title  SmartAdmin
+        meta(name='description', content='')
+        meta(name='author', content='')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+        // #CSS Links
+        // Basic Styles
+        link(rel='stylesheet', type='text/css', media='screen', href='css/bootstrap.min.css')
+        link(rel='stylesheet', type='text/css', media='screen', href='css/font-awesome.min.css')
+        // SmartAdmin Styles : Caution! DO NOT change the order
+        link(rel='stylesheet', type='text/css', media='screen', href='css/smartadmin-production-plugins.min.css')
+        link(rel='stylesheet', type='text/css', media='screen', href='css/smartadmin-production.min.css')
+        link(rel='stylesheet', type='text/css', media='screen', href='css/smartadmin-skins.min.css')
+        // SmartAdmin RTL Support
+        link(rel='stylesheet', type='text/css', media='screen', href='css/smartadmin-rtl.min.css')
+        //
+            We recommend you use "your_style.css" to override SmartAdmin
+            specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+            <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css">
+        // Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp
+        link(rel='stylesheet', type='text/css', media='screen', href='css/demo.min.css')
+        // #FAVICONS
+        link(rel='shortcut icon', href='img/favicon/favicon.ico', type='image/x-icon')
+        link(rel='icon', href='img/favicon/favicon.ico', type='image/x-icon')
+        // #GOOGLE FONT
+        link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700')
+        // #APP SCREEN / ICONS
+        //
+            Specifying a Webpage Icon for Web Clip
+            Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html
+        link(rel='apple-touch-icon', href='img/splash/sptouch-icon-iphone.png')
+        link(rel='apple-touch-icon', sizes='76x76', href='img/splash/touch-icon-ipad.png')
+        link(rel='apple-touch-icon', sizes='120x120', href='img/splash/touch-icon-iphone-retina.png')
+        link(rel='apple-touch-icon', sizes='152x152', href='img/splash/touch-icon-ipad-retina.png')
+        // iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance
+        meta(name='apple-mobile-web-app-capable', content='yes')
+        meta(name='apple-mobile-web-app-status-bar-style', content='black')
+        // Startup image for web apps
+        link(rel='apple-touch-startup-image', href='img/splash/ipad-landscape.png', media='screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)')
+        link(rel='apple-touch-startup-image', href='img/splash/ipad-portrait.png', media='screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)')
+        link(rel='apple-touch-startup-image', href='img/splash/iphone.png', media='screen and (max-device-width: 320px)')
+    //
+        TABLE OF CONTENTS.
+        Use search to find needed section.
+        ===================================================================
+        |  01. #CSS Links                |  all CSS links and file paths  |
+        |  02. #FAVICONS                 |  Favicon links and file paths  |
+        |  03. #GOOGLE FONT              |  Google font link              |
+        |  04. #APP SCREEN / ICONS       |  app icons, screen backdrops   |
+        |  05. #BODY                     |  body tag                      |
+        |  06. #HEADER                   |  header tag                    |
+        |  07. #PROJECTS                 |  project lists                 |
+        |  08. #TOGGLE LAYOUT BUTTONS    |  layout buttons and actions    |
+        |  09. #MOBILE                   |  mobile view dropdown          |
+        |  10. #SEARCH                   |  search field                  |
+        |  11. #NAVIGATION               |  left panel & navigation       |
+        |  12. #MAIN PANEL               |  main panel                    |
+        |  13. #MAIN CONTENT             |  content holder                |
+        |  14. #PAGE FOOTER              |  page footer                   |
+        |  15. #SHORTCUT AREA            |  dropdown shortcuts area       |
+        |  16. #PLUGINS                  |  all scripts and plugins       |
+        ===================================================================
+    // #BODY
+    //
+        Possible Classes
+        * 'smart-style-{SKIN#}'
+        * 'smart-rtl'         - Switch theme mode to RTL
+        * 'menu-on-top'       - Switch to top navigation (no DOM change required)
+        * 'no-menu'			  - Hides the menu completely
+        * 'hidden-menu'       - Hides the main menu but still accessable by hovering over left edge
+        * 'fixed-header'      - Fixes the header
+        * 'fixed-navigation'  - Fixes the main menu
+        * 'fixed-ribbon'      - Fixes breadcrumb
+        * 'fixed-page-footer' - Fixes footer
+        * 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
+    body.smart-style-6.container
+        // #HEADER
+        header#header
+            #logo-group
+                // PLACE YOUR LOGO HERE
+                span#logo
+                    img(src='img/logo.png', alt='SmartAdmin')
+                // END LOGO PLACEHOLDER
+                //
+                    Note: The activity badge color changes when clicked and resets the number to 0
+                    Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications
+                span#activity.activity-dropdown
+                    i.fa.fa-user
+                    b.badge  21
+                // AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file
+                .ajax-dropdown
+                    // the ID links are fetched via AJAX to the ajax container "ajax-notifications"
+                    .btn-group.btn-group-justified(data-toggle='buttons')
+                        label.btn.btn-default
+                            input(type='radio', name='activity', id='ajax/notify/mail.html')
+                            |                            Msgs (14)
+                        label.btn.btn-default
+                            input(type='radio', name='activity', id='ajax/notify/notifications.html')
+                            |                            notify (3)
+                        label.btn.btn-default
+                            input(type='radio', name='activity', id='ajax/notify/tasks.html')
+                            |                            Tasks (4)
+                    // notification content
+                    .ajax-notifications.custom-scroll
+                        .alert.alert-transparent
+                            h4 Click a button to show messages here
+                            |                            This blank page message helps protect your privacy, or you can show the first message here automatically.
+                        i.fa.fa-lock.fa-4x.fa-border
+                    // end notification content
+                    // footer: refresh area
+                    span
+                        | Last updated on: 12/12/2013 9:43AM
+                        button.btn.btn-xs.btn-default.pull-right(type='button', data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading...")
+                            i.fa.fa-refresh
+                    // end footer
+                // END AJAX-DROPDOWN
+            // #PROJECTS: projects dropdown
+            .project-context.hidden-xs
+                span.label Projects:
+                span.project-selector.dropdown-toggle(data-toggle='dropdown')
+                    | Recent projects
+                    i.fa.fa-angle-down
+                // Suggestion: populate this list with fetch and push technique
+                ul.dropdown-menu
+                    li
+                        a(href='javascript:void(0);') Online e-merchant management system - attaching integration with the iOS
+                    li
+                        a(href='javascript:void(0);') Notes on pipeline upgradee
+                    li
+                        a(href='javascript:void(0);') Assesment Report for merchant account
+                    li.divider
+                    li
+                        a(href='javascript:void(0);')
+                            i.fa.fa-power-off
+                            |  Clear
+                // end dropdown-menu
+            // end projects dropdown
+            // #TOGGLE LAYOUT BUTTONS
+            // pulled right: nav area
+            .pull-right
+                // collapse menu button
+                #hide-menu.btn-header.pull-right
+                    span
+                        a(href='javascript:void(0);', data-action='toggleMenu', title='Collapse Menu')
+                            i.fa.fa-reorder
+                // end collapse menu
+                // #MOBILE
+                // Top menu profile link : this shows only when top menu is active
+                ul#mobile-profile-img.header-dropdown-list.hidden-xs.padding-5
+                    li
+                        a.dropdown-toggle.no-margin.userdropdown(href='#', data-toggle='dropdown')
+                            img.online(src='img/avatars/sunny.png', alt='John Doe')
+                        ul.dropdown-menu.pull-right
+                            li
+                                a.padding-10.padding-top-0.padding-bottom-0(href='javascript:void(0);')
+                                    i.fa.fa-cog
+                                    |  Setting
+                            li.divider
+                            li
+                                a.padding-10.padding-top-0.padding-bottom-0(href='profile.html')
+                                    i.fa.fa-user
+                                    u P
+                                    | rofile
+                            li.divider
+                            li
+                                a.padding-10.padding-top-0.padding-bottom-0(href='javascript:void(0);', data-action='toggleShortcut')
+                                    i.fa.fa-arrow-down
+                                    u S
+                                    | hortcut
+                            li.divider
+                            li
+                                a.padding-10.padding-top-0.padding-bottom-0(href='javascript:void(0);', data-action='launchFullscreen')
+                                    i.fa.fa-arrows-alt
+                                    |  Full
+                                    u S
+                                    | creen
+                            li.divider
+                            li
+                                a.padding-10.padding-top-5.padding-bottom-5(href='login.html', data-action='userLogout')
+                                    i.fa.fa-sign-out.fa-lg
+                                    strong
+                                        u L
+                                        | ogout
+                // logout button
+                #logout.btn-header.transparent.pull-right
+                    span
+                        a(href='login.html', title='Sign Out', data-action='userLogout', data-logout-msg='You can improve your security further after logging out by closing this opened browser')
+                            i.fa.fa-sign-out
+                // end logout button
+                // search mobile button (this is hidden till mobile view port)
+                #search-mobile.btn-header.transparent.pull-right
+                    span
+                        a(href='javascript:void(0)', title='Search')
+                            i.fa.fa-search
+                // end search mobile button
+                // #SEARCH
+                // input: search field
+                form.header-search.pull-right(action='search.html')
+                    input#search-fld(type='text', name='param', placeholder='Find reports and more')
+                    button(type='submit')
+                        i.fa.fa-search
+                    a#cancel-search-js(href='javascript:void(0);', title='Cancel Search')
+                        i.fa.fa-times
+                // end input: search field
+                // fullscreen button
+                #fullscreen.btn-header.transparent.pull-right
+                    span
+                        a(href='javascript:void(0);', data-action='launchFullscreen', title='Full Screen')
+                            i.fa.fa-arrows-alt
+                // end fullscreen button
+                // #Voice Command: Start Speech
+                #speech-btn.btn-header.transparent.pull-right.hidden-sm.hidden-xs
+                    div
+                        a(href='javascript:void(0)', title='Voice Command', data-action='voiceCommand')
+                            i.fa.fa-microphone
+                        .popover.bottom
+                            .arrow
+                            .popover-content
+                                h4.vc-title
+                                    | Voice command activated
+                                    br
+                                    small Please speak clearly into the mic
+                                h4.vc-title-error.text-center
+                                    i.fa.fa-microphone-slash
+                                    |  Voice command failed
+                                    br
+                                    small.txt-color-red
+                                        | Must
+                                        strong "Allow"
+                                        |  Microphone
+                                    br
+                                    small.txt-color-red
+                                        | Must have
+                                        strong Internet Connection
+                                a.btn.btn-success(href='javascript:void(0);', onclick='commands.help()') See Commands
+                                a.btn.bg-color-purple.txt-color-white(href='javascript:void(0);', onclick="$('#speech-btn .popover').fadeOut(50);") Close Popup
+                // end voice command
+                // multiple lang dropdown : find all flags in the flags page
+                ul.header-dropdown-list.hidden-xs
+                    li
+                        a.dropdown-toggle(href='#', data-toggle='dropdown')
+                            img.flag.flag-us(src='img/blank.gif', alt='United States')
+                            span  English (US)
+                            i.fa.fa-angle-down
+                        ul.dropdown-menu.pull-right
+                            li.active
+                                a(href='javascript:void(0);')
+                                    img.flag.flag-us(src='img/blank.gif', alt='United States')
+                                    |  English (US)
+                            li
+                                a(href='javascript:void(0);')
+                                    img.flag.flag-fr(src='img/blank.gif', alt='France')
+                                    |  Français
+                            li
+                                a(href='javascript:void(0);')
+                                    img.flag.flag-es(src='img/blank.gif', alt='Spanish')
+                                    |  Español
+                            li
+                                a(href='javascript:void(0);')
+                                    img.flag.flag-de(src='img/blank.gif', alt='German')
+                                    |  Deutsch
+                            li
+                                a(href='javascript:void(0);')
+                                    img.flag.flag-jp(src='img/blank.gif', alt='Japan')
+                                    |  日本語
+                            li
+                                a(href='javascript:void(0);')
+                                    img.flag.flag-cn(src='img/blank.gif', alt='China')
+                                    |  中文
+                            li
+                                a(href='javascript:void(0);')
+                                    img.flag.flag-it(src='img/blank.gif', alt='Italy')
+                                    |  Italiano
+                            li
+                                a(href='javascript:void(0);')
+                                    img.flag.flag-pt(src='img/blank.gif', alt='Portugal')
+                                    |  Portugal
+                            li
+                                a(href='javascript:void(0);')
+                                    img.flag.flag-ru(src='img/blank.gif', alt='Russia')
+                                    |  Русский язык
+                            li
+                                a(href='javascript:void(0);')
+                                    img.flag.flag-kr(src='img/blank.gif', alt='Korea')
+                                    |  한국어
+                // end multiple lang
+            // end pulled right: nav area
+        // END HEADER
+        // #NAVIGATION
+        // Left panel : Navigation area
+        // Note: This width of the aside area can be adjusted through LESS variables
+        aside#left-panel
+            // User info
+            .login-info
+                span
+                    // User image size is adjusted inside CSS, it should stay as it
+                    a#show-shortcut(href='javascript:void(0);', data-action='toggleShortcut')
+                        img.online(src='img/avatars/sunny.png', alt='me')
+                        span john.doe
+                        i.fa.fa-angle-down
+            // end user info
+            nav
+                //
+                    NOTE: Notice the gaps after each icon usage <i></i>..
+                    Please note that these links work a bit different than
+                    traditional href="" links. See documentation for details.
+                ul
+                    li
+                        a(href='#', title='Dashboard')
+                            i.fa.fa-lg.fa-fw.fa-home
+                            span.menu-item-parent Dashboard
+                        ul
+                            li
+                                a(href='index.html', title='Dashboard')
+                                    span.menu-item-parent Analytics Dashboard
+                            li
+                                a(href='dashboard-social.html', title='Dashboard')
+                                    span.menu-item-parent Social Wall
+                    li.top-menu-invisible
+                        a(href='#')
+                            i.fa.fa-lg.fa-fw.fa-cube.txt-color-blue
+                            span.menu-item-parent SmartAdmin Intel
+                        ul
+                            li
+                                a(href='layouts.html', title='Dashboard')
+                                    i.fa.fa-lg.fa-fw.fa-gear
+                                    span.menu-item-parent App Layouts
+                            li
+                                a(href='skins.html', title='Dashboard')
+                                    i.fa.fa-lg.fa-fw.fa-picture-o
+                                    span.menu-item-parent Prebuilt Skins
+                            li
+                                a(href='applayout.html')
+                                    i.fa.fa-cube
+                                    |  App Settings
+                    li
+                        a(href='inbox.html')
+                            i.fa.fa-lg.fa-fw.fa-inbox
+                            span.menu-item-parent Outlook
+                            span.badge.pull-right.inbox-badge.margin-right-13 14
+                    li
+                        a(href='#')
+                            i.fa.fa-lg.fa-fw.fa-bar-chart-o
+                            span.menu-item-parent Graphs
+                        ul
+                            li
+                                a(href='flot.html') Flot Chart
+                            li
+                                a(href='morris.html') Morris Charts
+                            li
+                                a(href='sparkline-charts.html') Sparklines
+                            li
+                                a(href='easypie-charts.html') EasyPieCharts
+                            li
+                                a(href='dygraphs.html') Dygraphs
+                            li
+                                a(href='chartjs.html') Chart.js
+                            li
+                                a(href='hchartable.html')
+                                    | HighchartTable
+                                    span.badge.pull-right.inbox-badge.bg-color-yellow new
+                    li
+                        a(href='#')
+                            i.fa.fa-lg.fa-fw.fa-table
+                            span.menu-item-parent Tables
+                        ul
+                            li
+                                a(href='table.html') Normal Tables
+                            li
+                                a(href='datatables.html')
+                                    | Data Tables
+                                    span.badge.inbox-badge.bg-color-greenLight.hidden-mobile responsive
+                            li
+                                a(href='jqgrid.html') Jquery Grid
+                    li
+                        a(href='#')
+                            i.fa.fa-lg.fa-fw.fa-pencil-square-o
+                            span.menu-item-parent Forms
+                        ul
+                            li
+                                a(href='form-elements.html') Smart Form Elements
+                            li
+                                a(href='form-templates.html') Smart Form Layouts
+                            li
+                                a(href='validation.html') Smart Form Validation
+                            li
+                                a(href='bootstrap-forms.html') Bootstrap Form Elements
+                            li
+                                a(href='bootstrap-validator.html') Bootstrap Form Validation
+                            li
+                                a(href='plugins.html') Form Plugins
+                            li
+                                a(href='wizard.html') Wizards
+                            li
+                                a(href='other-editors.html') Bootstrap Editors
+                            li
+                                a(href='dropzone.html') Dropzone
+                            li
+                                a(href='image-editor.html') Image Cropping
+                            li
+                                a(href='ckeditor.html') CK Editor
+                    li
+                        a(href='#')
+                            i.fa.fa-lg.fa-fw.fa-desktop
+                            span.menu-item-parent UI Elements
+                        ul
+                            li
+                                a(href='general-elements.html') General Elements
+                            li
+                                a(href='buttons.html') Buttons
+                            li
+                                a(href='#') Icons
+                                ul
+                                    li
+                                        a(href='fa.html')
+                                            i.fa.fa-plane
+                                            |  Font Awesome
+                                    li
+                                        a(href='glyph.html')
+                                            i.glyphicon.glyphicon-plane
+                                            |  Glyph Icons
+                                    li
+                                        a(href='flags.html')
+                                            i.fa.fa-flag
+                                            |  Flags
+                            li
+                                a(href='grid.html') Grid
+                            li
+                                a(href='treeview.html') Tree View
+                            li
+                                a(href='nestable-list.html') Nestable Lists
+                            li
+                                a(href='jqui.html') JQuery UI
+                            li
+                                a(href='typography.html') Typography
+                            li
+                                a(href='#') Six Level Menu
+                                ul
+                                    li
+                                        a(href='#')
+                                            i.fa.fa-fw.fa-folder-open
+                                            |  Item #2
+                                        ul
+                                            li
+                                                a(href='#')
+                                                    i.fa.fa-fw.fa-folder-open
+                                                    |  Sub #2.1
+                                                ul
+                                                    li
+                                                        a(href='#')
+                                                            i.fa.fa-fw.fa-file-text
+                                                            |  Item #2.1.1
+                                                    li
+                                                        a(href='#')
+                                                            i.fa.fa-fw.fa-plus
+                                                            |  Expand
+                                                        ul
+                                                            li
+                                                                a(href='#')
+                                                                    i.fa.fa-fw.fa-file-text
+                                                                    |  File
+                                    li
+                                        a(href='#')
+                                            i.fa.fa-fw.fa-folder-open
+                                            |  Item #3
+                                        ul
+                                            li
+                                                a(href='#')
+                                                    i.fa.fa-fw.fa-folder-open
+                                                    |  3ed Level
+                                                ul
+                                                    li
+                                                        a(href='#')
+                                                            i.fa.fa-fw.fa-file-text
+                                                            |  File
+                                                    li
+                                                        a(href='#')
+                                                            i.fa.fa-fw.fa-file-text
+                                                            |  File
+                                    li
+                                        a.inactive(href='#')
+                                            i.fa.fa-fw.fa-folder-open
+                                            |  Item #4 (disabled)
+                    li
+                        a(href='widgets.html')
+                            i.fa.fa-lg.fa-fw.fa-list-alt
+                            span.menu-item-parent Widgets
+                    li
+                        a(href='#')
+                            i.fa.fa-lg.fa-fw.fa-cloud
+                                em 3
+                            span.menu-item-parent Cool Features!
+                        ul
+                            li
+                                a(href='calendar.html')
+                                    i.fa.fa-lg.fa-fw.fa-calendar
+                                    span.menu-item-parent Calendar
+                            li
+                                a(href='gmap-xml.html')
+                                    i.fa.fa-lg.fa-fw.fa-map-marker
+                                    span.menu-item-parent GMap Skins
+                                    span.badge.bg-color-greenLight.pull-right.inbox-badge 9
+                    li
+                        a(href='#')
+                            i.fa.fa-lg.fa-fw.fa-puzzle-piece
+                            span.menu-item-parent App Views
+                        ul
+                            li
+                                a(href='projects.html')
+                                    i.fa.fa-file-text-o
+                                    |  Projects
+                            li
+                                a(href='blog.html')
+                                    i.fa.fa-paragraph
+                                    |  Blog
+                            li
+                                a(href='gallery.html')
+                                    i.fa.fa-picture-o
+                                    |  Gallery
+                            li
+                                a(href='#')
+                                    i.fa.fa-comments
+                                    |  Forum Layout
+                                ul
+                                    li
+                                        a(href='forum.html') General View
+                                    li
+                                        a(href='forum-topic.html') Topic View
+                                    li
+                                        a(href='forum-post.html') Post View
+                            li
+                                a(href='profile.html')
+                                    i.fa.fa-group
+                                    |  Profile
+                            li
+                                a(href='timeline.html')
+                                    i.fa.fa-clock-o
+                                    |  Timeline
+                            li
+                                a(href='search.html')
+                                    i.fa.fa-search
+                                    |   Search Page
+                    li
+                        a(href='#')
+                            i.fa.fa-lg.fa-fw.fa-shopping-cart
+                            span.menu-item-parent E-Commerce
+                        ul
+                            li
+                                a(href='orders.html') Orders
+                            li
+                                a(href='products-view.html') Products View
+                            li
+                                a(href='products-detail.html') Products Detail
+                    li.active
+                        a(href='#')
+                            i.fa.fa-lg.fa-fw.fa-windows
+                            span.menu-item-parent Miscellaneous
+                        ul
+                            li
+                                a(href='../Landing_Page/', target='_blank')
+                                    | Landing Page
+                                    i.fa.fa-external-link
+                            li
+                                a(href='pricing-table.html') Pricing Tables
+                            li
+                                a(href='invoice.html') Invoice
+                            li
+                                a(href='login.html', target='_top') Login
+                            li
+                                a(href='register.html', target='_top') Register
+                            li
+                                a(href='forgotpassword.html', target='_top') Forgot Password
+                            li
+                                a(href='lock.html', target='_top') Locked Screen
+                            li
+                                a(href='error404.html') Error 404
+                            li
+                                a(href='error500.html') Error 500
+                            li.active
+                                a(href='blank_.html') Blank Page
+                    li.chat-users.top-menu-invisible
+                        a(href='#')
+                            i.fa.fa-lg.fa-fw.fa-comment-o
+                                em.bg-color-pink.flash.animated !
+                            span.menu-item-parent
+                                | Smart Chat API
+                                sup beta
+                        ul
+                            li
+                                // DISPLAY USERS
+                                .display-users
+                                    input.form-control.chat-user-filter(placeholder='Filter', type='text')
+                                    a.usr(href='#', data-chat-id='cha1', data-chat-fname='Sadi', data-chat-lname='Orlaf', data-chat-status='busy', data-chat-alertmsg='Sadi Orlaf is in a meeting. Please do not disturb!', data-chat-alertshow='true', data-rel='popover-hover', data-placement='right', data-html='true', data-content="                  <div class='usr-card'>                  <img src='img/avatars/5.png' alt='Sadi Orlaf'>                  <div class='usr-card-content'>                  <h3>Sadi Orlaf</h3>                  <p>Marketing Executive</p>                  </div>                  </div>                  ")
+                                        i
+                                        | Sadi Orlaf
+                                    a.usr(href='#', data-chat-id='cha2', data-chat-fname='Jessica', data-chat-lname='Dolof', data-chat-status='online', data-chat-alertmsg='', data-chat-alertshow='false', data-rel='popover-hover', data-placement='right', data-html='true', data-content="                  <div class='usr-card'>                  <img src='img/avatars/1.png' alt='Jessica Dolof'>                  <div class='usr-card-content'>                  <h3>Jessica Dolof</h3>                  <p>Sales Administrator</p>                  </div>                  </div>                  ")
+                                        i
+                                        | Jessica Dolof
+                                    a.usr(href='#', data-chat-id='cha3', data-chat-fname='Zekarburg', data-chat-lname='Almandalie', data-chat-status='online', data-rel='popover-hover', data-placement='right', data-html='true', data-content="                  <div class='usr-card'>                  <img src='img/avatars/3.png' alt='Zekarburg Almandalie'>                  <div class='usr-card-content'>                  <h3>Zekarburg Almandalie</h3>                  <p>Sales Admin</p>                  </div>                  </div>                  ")
+                                        i
+                                        | Zekarburg Almandalie
+                                    a.usr(href='#', data-chat-id='cha4', data-chat-fname='Barley', data-chat-lname='Krazurkth', data-chat-status='away', data-rel='popover-hover', data-placement='right', data-html='true', data-content="                  <div class='usr-card'>                  <img src='img/avatars/4.png' alt='Barley Krazurkth'>                  <div class='usr-card-content'>                  <h3>Barley Krazurkth</h3>                  <p>Sales Director</p>                  </div>                  </div>                  ")
+                                        i
+                                        | Barley Krazurkth
+                                    a.usr.offline(href='#', data-chat-id='cha5', data-chat-fname='Farhana', data-chat-lname='Amrin', data-chat-status='incognito', data-rel='popover-hover', data-placement='right', data-html='true', data-content="                  <div class='usr-card'>                  <img src='img/avatars/female.png' alt='Farhana Amrin'>                  <div class='usr-card-content'>                  <h3>Farhana Amrin</h3>                  <p>Support Admin <small><i class='fa fa-music'></i> Playing Beethoven Classics</small></p>                  </div>                  </div>                  ")
+                                        i
+                                        | Farhana Amrin (offline)
+                                    a.usr.offline(href='#', data-chat-id='cha6', data-chat-fname='Lezley', data-chat-lname='Jacob', data-chat-status='incognito', data-rel='popover-hover', data-placement='right', data-html='true', data-content="                  <div class='usr-card'>                  <img src='img/avatars/male.png' alt='Lezley Jacob'>                  <div class='usr-card-content'>                  <h3>Lezley Jacob</h3>                  <p>Sales Director</p>                  </div>                  </div>                  ")
+                                        i
+                                        | Lezley Jacob (offline)
+                                    a.btn.btn-xs.btn-default.btn-block.sa-chat-learnmore-btn(href='ajax/chat.html') About the API
+                                // END DISPLAY USERS
+            span.minifyme(data-action='minifyMenu')
+                i.fa.fa-arrow-circle-left.hit
+        // END NAVIGATION
+        // MAIN PANEL
+        #main(role='main')
+            // RIBBON
+            #ribbon
+                span.ribbon-button-alignment
+                    span#refresh.btn.btn-ribbon(data-action='resetWidgets', data-title='refresh', rel='tooltip', data-placement='bottom', data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.", data-html='true')
+                        i.fa.fa-refresh
+                // breadcrumb
+                ol.breadcrumb
+                    li Home
+                    li Miscellaneous
+                    li Blank Page
+                // end breadcrumb
+                //
+                    You can also add more buttons to the
+                    ribbon for further usability
+                    Example below:
+                    <span class="ribbon-button-alignment pull-right">
+                    <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+                    <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+                    <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+                    </span>
+            // END RIBBON
+            // MAIN CONTENT
+            #content
+                // row
+                .row
+                    // col
+                    .col-xs-12.col-sm-7.col-md-7.col-lg-4
+                        h1.page-title.txt-color-blueDark
+                            // PAGE HEADER
+                            i.fa-fw.fa.fa-home
+                            |                                Page Header
+                            span
+                                | >
+                                | Subtitle
+                    // end col
+                    // right side of the page with the sparkline graphs
+                    // col
+                    .col-xs-12.col-sm-5.col-md-5.col-lg-8
+                        // sparks
+                        ul#sparks
+                            li.sparks-info
+                                h5
+                                    | My Income
+                                    span.txt-color-blue $47,171
+                                .sparkline.txt-color-blue.hidden-mobile.hidden-md.hidden-sm 1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
+                            li.sparks-info
+                                h5
+                                    | Site Traffic
+                                    span.txt-color-purple
+                                        i.fa.fa-arrow-circle-up(data-rel='bootstrap-tooltip', title='Increased')
+                                        |  45%
+                                .sparkline.txt-color-purple.hidden-mobile.hidden-md.hidden-sm 110,150,300,130,400,240,220,310,220,300, 270, 210
+                            li.sparks-info
+                                h5
+                                    | Site Orders
+                                    span.txt-color-greenDark
+                                        i.fa.fa-shopping-cart
+                                        |  2447
+                                .sparkline.txt-color-greenDark.hidden-mobile.hidden-md.hidden-sm 110,150,300,130,400,240,220,310,220,300, 270, 210
+                        // end sparks
+                    // end col
+                // end row
+                //
+                    The ID "widget-grid" will start to initialize all widgets below
+                    You do not need to use widgets if you dont want to. Simply remove
+                    the <section></section> and you can use wells or panels instead
+                // widget grid
+                section#widget-grid
+                    // row
+                    .row
+                        // NEW WIDGET START
+                        article.col-xs-12.col-sm-12.col-md-12.col-lg-12
+                            // Widget ID (each widget will need unique ID)
+                            #wid-id-0.jarviswidget
+                                //
+                                    widget options:
+                                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                                    data-widget-colorbutton="false"
+                                    data-widget-editbutton="false"
+                                    data-widget-togglebutton="false"
+                                    data-widget-deletebutton="false"
+                                    data-widget-fullscreenbutton="false"
+                                    data-widget-custombutton="false"
+                                    data-widget-collapsed="true"
+                                    data-widget-sortable="false"
+                                header
+                                    span.widget-icon
+                                        i.fa.fa-comments
+                                    h2 Widget Title
+                                // widget div
+                                div
+                                    // widget edit box
+                                    .jarviswidget-editbox
+                                        // This area used as dropdown edit box
+                                        input.form-control(type='text')
+                                    // end widget edit box
+                                    // widget content
+                                    .widget-body
+                                        // this is what the user will see
+                                    // end widget content
+                                // end widget div
+                            // end widget
+                        // WIDGET END
+                    // end row
+                    // row
+                    .row
+                        // a blank row to get started
+                        .col-sm-12
+                            // your contents here
+                    // end row
+                // end widget grid
+            // END MAIN CONTENT
+        // END MAIN PANEL
+        // PAGE FOOTER
+        .page-footer
+            .row
+                .col-xs-12.col-sm-6
+                    span.txt-color-white
+                        | SmartAdmin 1.8.2
+                        span.hidden-xs  - Web Application Framework
+                        |  © 2014-2015
+                .col-xs-6.col-sm-6.text-right.hidden-xs
+                    .txt-color-white.inline-block
+                        i.txt-color-blueLight.hidden-mobile
+                            | Last account activity
+                            i.fa.fa-clock-o
+                            strong 52 mins ago  
+                        .btn-group.dropup
+                            button.btn.btn-xs.dropdown-toggle.bg-color-blue.txt-color-white(data-toggle='dropdown')
+                                i.fa.fa-link
+                                span.caret
+                            ul.dropdown-menu.pull-right.text-left
+                                li
+                                    .padding-5
+                                        p.txt-color-darken.font-sm.no-margin Download Progress
+                                        .progress.progress-micro.no-margin
+                                            .progress-bar.progress-bar-success(style='width: 50%;')
+                                li.divider
+                                li
+                                    .padding-5
+                                        p.txt-color-darken.font-sm.no-margin Server Load
+                                        .progress.progress-micro.no-margin
+                                            .progress-bar.progress-bar-success(style='width: 20%;')
+                                li.divider
+                                li
+                                    .padding-5
+                                        p.txt-color-darken.font-sm.no-margin
+                                            | Memory Load
+                                            span.text-danger *critical*
+                                        .progress.progress-micro.no-margin
+                                            .progress-bar.progress-bar-danger(style='width: 70%;')
+                                li.divider
+                                li
+                                    .padding-5
+                                        button.btn.btn-block.btn-default refresh
+        // END PAGE FOOTER
+        //
+            SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+            Note: These tiles are completely responsive,
+            you can add as many as you like
+        #shortcut
+            ul
+                li
+                    a.jarvismetro-tile.big-cubes.bg-color-blue(href='inbox.html')
+                        span.iconbox
+                            i.fa.fa-envelope.fa-4x
+                            span
+                                | Mail
+                                span.label.pull-right.bg-color-darken 14
+                li
+                    a.jarvismetro-tile.big-cubes.bg-color-orangeDark(href='calendar.html')
+                        span.iconbox
+                            i.fa.fa-calendar.fa-4x
+                            span Calendar
+                li
+                    a.jarvismetro-tile.big-cubes.bg-color-purple(href='gmap-xml.html')
+                        span.iconbox
+                            i.fa.fa-map-marker.fa-4x
+                            span Maps
+                li
+                    a.jarvismetro-tile.big-cubes.bg-color-blueDark(href='invoice.html')
+                        span.iconbox
+                            i.fa.fa-book.fa-4x
+                            span
+                                | Invoice
+                                span.label.pull-right.bg-color-darken 99
+                li
+                    a.jarvismetro-tile.big-cubes.bg-color-greenLight(href='gallery.html')
+                        span.iconbox
+                            i.fa.fa-picture-o.fa-4x
+                            span Gallery
+                li
+                    a.jarvismetro-tile.big-cubes.selected.bg-color-pinkDark(href='profile.html')
+                        span.iconbox
+                            i.fa.fa-user.fa-4x
+                            span My Profile
+        // END SHORTCUT AREA
+        // ==================================================
+        // PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+        script(data-pace-options='{ "restartOnRequestAfter": true }', src='js/plugin/pace/pace.min.js')
+        // Link to Google CDN's jQuery + jQueryUI; fall back to local
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+        script.
+            if (!window.jQuery) {
+                document.write('<script src="js/libs/jquery-2.1.1.min.js"><\\\/script>');
+            }
+        script(src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+        script.
+            if (!window.jQuery.ui) {
+                document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\\\/script>');
+            }
+        // IMPORTANT: APP CONFIG
+        script(src='js/app.config.js')
+        // JS TOUCH : include this plugin for mobile drag / drop touch events
+        script(src='js/plugin/jquery-touch/jquery.ui.touch-punch.min.js')
+        // BOOTSTRAP JS
+        script(src='js/bootstrap/bootstrap.min.js')
+        // CUSTOM NOTIFICATION
+        script(src='js/notification/SmartNotification.min.js')
+        // JARVIS WIDGETS
+        script(src='js/smartwidgets/jarvis.widget.min.js')
+        // EASY PIE CHARTS
+        script(src='js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js')
+        // SPARKLINES
+        script(src='js/plugin/sparkline/jquery.sparkline.min.js')
+        // JQUERY VALIDATE
+        script(src='js/plugin/jquery-validate/jquery.validate.min.js')
+        // JQUERY MASKED INPUT
+        script(src='js/plugin/masked-input/jquery.maskedinput.min.js')
+        // JQUERY SELECT2 INPUT
+        script(src='js/plugin/select2/select2.min.js')
+        // JQUERY UI + Bootstrap Slider
+        script(src='js/plugin/bootstrap-slider/bootstrap-slider.min.js')
+        // browser msie issue fix
+        script(src='js/plugin/msie-fix/jquery.mb.browser.min.js')
+        // FastClick: For mobile devices
+        script(src='js/plugin/fastclick/fastclick.min.js')
+        //
+            if IE 8
+            h1
+            | Your browser is out of date, please update your browser by going to www.microsoft.com/download
+        // Demo purpose only
+        script(src='js/demo.min.js')
+        // MAIN APP JS FILE
+        script(src='js/app.min.js')
+        // ENHANCEMENT PLUGINS : NOT A REQUIREMENT
+        // Voice command : plugin
+        script(src='js/speech/voicecommand.min.js')
+        // SmartChat UI : plugin
+        script(src='js/smart-chat-ui/smart.chat.ui.min.js')
+        script(src='js/smart-chat-ui/smart.chat.manager.min.js')
+        //
+            PAGE RELATED PLUGIN(S)
+            <script src="..."></script>
+        script(type='text/javascript').
+            $(document).ready(function () {
+                /* DO NOT REMOVE : GLOBAL FUNCTIONS!
+                 *
+                 * pageSetUp(); WILL CALL THE FOLLOWING FUNCTIONS
+                 *
+                 * // activate tooltips
+                 * $("[rel=tooltip]").tooltip();
+                 *
+                 * // activate popovers
+                 * $("[rel=popover]").popover();
+                 *
+                 * // activate popovers with hover states
+                 * $("[rel=popover-hover]").popover({ trigger: "hover" });
+                 *
+                 * // activate inline charts
+                 * runAllCharts();
+                 *
+                 * // setup widgets
+                 * setup_widgets_desktop();
+                 *
+                 * // run form elements
+                 * runAllForms();
+                 *
+                 ********************************
+                 *
+                 * pageSetUp() is needed whenever you load a page.
+                 * It initializes and checks for all basic elements of the page
+                 * and makes rendering easier.
+                 *
+                 */
+                pageSetUp();
+                /*
+                 * ALL PAGE RELATED SCRIPTS CAN GO BELOW HERE
+                 * eg alert("my home function");
+                 *
+                 * var pagefunction = function() {
+                 *   ...
+                 * }
+                 * loadScript("js/plugin/_PLUGIN_NAME_.js", pagefunction);
+                 *
+                 * TO LOAD A SCRIPT:
+                 * var pagefunction = function (){
+                 *  loadScript(".../plugin.js", run_after_loaded);
+                 * }
+                 *
+                 * OR
+                 *
+                 * loadScript(".../plugin.js", run_after_loaded);
+                 */
+            })
+        // Your GOOGLE ANALYTICS CODE Below

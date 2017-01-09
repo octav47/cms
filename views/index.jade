@@ -1,0 +1,164 @@
+extends include/header
+
+block content
+    // #HEADER
+    header#header
+        #logo-group
+            // PLACE YOUR LOGO HERE
+            span#logo
+            // END LOGO PLACEHOLDER
+            //
+                Note: The activity badge color changes when clicked and resets the number to 0
+                Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications
+            include include/activity
+        // #TOGGLE LAYOUT BUTTONS
+        // pulled right: nav area
+        .pull-right
+            // collapse menu button
+            #hide-menu.btn-header.pull-right
+                span
+                    a(href='javascript:void(0);', data-action='toggleMenu', title='Collapse Menu')
+                        i.fa.fa-reorder
+            // end collapse menu
+            // #MOBILE
+            // Top menu profile link : this shows only when top menu is active
+            ul#mobile-profile-img.header-dropdown-list.hidden-xs.padding-5
+                li
+                    a.dropdown-toggle.no-margin.userdropdown(href='#', data-toggle='dropdown')
+                        img.online(src='img/avatars/sunny.png', alt='John Doe')
+                    ul.dropdown-menu.pull-right
+                        li
+                            a.padding-10.padding-top-0.padding-bottom-0(href='javascript:void(0);')
+                                i.fa.fa-cog
+                                |  Настройки
+                        li.divider
+                        li
+                            a.padding-10.padding-top-0.padding-bottom-0(href='profile.html')
+                                i.fa.fa-user
+                                u Профиль
+                        li.divider
+                        li
+                            a.padding-10.padding-top-0.padding-bottom-0(href='javascript:void(0);', data-action='toggleShortcut')
+                                i.fa.fa-arrow-down
+                                u Уведомления
+                        li.divider
+                        li
+                            a.padding-10.padding-top-5.padding-bottom-5(href='login.html', data-action='userLogout')
+                                i.fa.fa-sign-out.fa-lg
+                                strong
+                                    u Выход
+            // logout button
+            #logout.btn-header.transparent.pull-right
+                span
+                    a(href='login.html', title='Sign Out', data-action='userLogout', data-logout-msg='You can improve your security further after logging out by closing this opened browser')
+                        i.fa.fa-sign-out
+            // end logout button
+            // search mobile button (this is hidden till mobile view port)
+            #search-mobile.btn-header.transparent.pull-right
+                span
+                    a(href='javascript:void(0)', title='Search')
+                        i.fa.fa-search
+            // end search mobile button
+            // #SEARCH
+            // input: search field
+            // end input: search field
+            // fullscreen button
+            #fullscreen.btn-header.transparent.pull-right
+                span
+                    a(href='javascript:void(0);', data-action='launchFullscreen', title='Full Screen')
+                        i.fa.fa-arrows-alt
+            // end fullscreen button
+            // end voice command
+            // multiple lang dropdown : find all flags in the flags page
+        // end pulled right: nav area
+    // END HEADER
+    // #NAVIGATION
+    // Left panel : Navigation area
+    // Note: This width of the aside area can be adjusted through LESS variables
+    aside#left-panel
+        // User info
+        .login-info
+            span
+                // User image size is adjusted inside CSS, it should stay as it
+                a#show-shortcut(href='javascript:void(0);', data-action='toggleShortcut')
+                    img.online(src='img/avatars/sunny.png', alt='me')
+                    span john.doe
+                    i.fa.fa-angle-down
+        // end user info
+        include include/navigation
+    // MAIN PANEL
+    #main(role='main')
+        // RIBBON
+        #ribbon
+            span.ribbon-button-alignment
+                span#refresh.btn.btn-ribbon(data-action='resetWidgets', data-title='refresh', rel='tooltip', data-placement='bottom', data-original-title="<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.", data-html='true')
+                    i.fa.fa-refresh
+            // breadcrumb
+            ol.breadcrumb
+                li Главная
+            // end breadcrumb
+            //
+                You can also add more buttons to the
+                ribbon for further usability
+                Example below:
+                <span class="ribbon-button-alignment pull-right">
+                <span id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa-grid"></i> Change Grid</span>
+                <span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa-plus"></i> Add</span>
+                <span id="search" class="btn btn-ribbon" data-title="search"><i class="fa-search"></i> <span class="hidden-mobile">Search</span></span>
+                </span>
+        // END RIBBON
+        // MAIN CONTENT
+        #content
+            // end row
+            //
+                The ID "widget-grid" will start to initialize all widgets below
+                You do not need to use widgets if you dont want to. Simply remove
+                the <section></section> and you can use wells or panels instead
+            // widget grid
+            section#widget-grid
+                // row
+                .row
+                    // NEW WIDGET START
+                    article.col-xs-12.col-sm-12.col-md-12.col-lg-12
+                        // Widget ID (each widget will need unique ID)
+                        #wid-id-0.jarviswidget
+                            //
+                                widget options:
+                                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+                                data-widget-colorbutton="false"
+                                data-widget-editbutton="false"
+                                data-widget-togglebutton="false"
+                                data-widget-deletebutton="false"
+                                data-widget-fullscreenbutton="false"
+                                data-widget-custombutton="false"
+                                data-widget-collapsed="true"
+                                data-widget-sortable="false"
+                            header
+                                span.widget-icon
+                                    i.fa.fa-comments
+                                h2 Widget Title
+                            // widget div
+                            div
+                                // widget edit box
+                                .jarviswidget-editbox
+                                    // This area used as dropdown edit box
+                                    input.form-control(type='text')
+                                // end widget edit box
+                                // widget content
+                                .widget-body
+                                    // this is what the user will see
+                                // end widget content
+                            // end widget div
+                        // end widget
+                    // WIDGET END
+                // end row
+                // row
+                .row
+                    // a blank row to get started
+                    .col-sm-12
+                        // your contents here
+                // end row
+            // end widget grid
+        // END MAIN CONTENT
+    // END MAIN PANEL
+    include include/footer

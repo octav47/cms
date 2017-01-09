@@ -1,0 +1,27 @@
+span#activity.activity-dropdown
+    i.fa.fa-user
+    b.badge  21
+// AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file
+.ajax-dropdown
+    // the ID links are fetched via AJAX to the ajax container "ajax-notifications"
+    .btn-group.btn-group-justified(data-toggle='buttons')
+        label.btn.btn-default
+            input(type='radio', name='activity', id='ajax/notify/notifications.html')
+            |                            Уведомления (3)
+        label.btn.btn-default
+            input(type='radio', name='activity', id='ajax/notify/tasks.html')
+            |                            Задания (4)
+    // notification content
+    .ajax-notifications.custom-scroll
+        .alert.alert-transparent
+            h4 Click a button to show messages here
+            |                            This blank page message helps protect your privacy, or you can show the first message here automatically.
+        i.fa.fa-lock.fa-4x.fa-border
+    // end notification content
+    // footer: refresh area
+    span
+        | Последнее обновление: 12/12/2016 10.00
+        button.btn.btn-xs.btn-default.pull-right(type='button', data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading...")
+            i.fa.fa-refresh
+    // end footer
+// END AJAX-DROPDOWN
